@@ -1,8 +1,12 @@
 from flask import Flask
 
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+    register_blueprints(app)
+    return app
 
 
-@app.route('/')
-def index():
-    return '<h1>Hello Flask!</h1>'
+def register_blueprints(app):
+    from backend.blueprints.index import index_bp
+    app.register_blueprint(index_bp)
